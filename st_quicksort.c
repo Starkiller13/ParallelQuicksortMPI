@@ -9,9 +9,13 @@ void quicksort_bs(float ** A, int n);
 void quicksort(struct element** stack, int it);
 
 int main(int argc, char** argv) {
-    int N = 1000000;
+    if(argc!= 3){
+        perror("Usage: mpirun ./mpi_quicksort <filename> <size>");
+        return 1;
+    }
+    int N = atoi(argv[2]);
     float a[N];
-    f= fopen("numbersBIG.txt","r");
+    f= fopen(argv[1],"r");
     for(i=0;i<N;i++)fscanf(f,"%f\n",&a[i]);
     fclose(f);
     float * a_p = a;
@@ -22,10 +26,20 @@ int main(int argc, char** argv) {
 	if(a[i]>a[i+1])flag=0;
     }
     el_time+=(double)(end-begin)/CLOCKS_PER_SEC;
-    printf("Elapsed time %f seconds",el_time);
-    printf("\nArray is ordered:");
+    //Checks if the array is ordered
+    f = fopen("out_st.txt","w");
+    if(f == NULL){perror("\nCannot access current directory");}
+    fprintf(f,"%f\n",a[0]);
+    for(i=0;i<N-1;i++){
+	    if(a[i]>a[i+1])flag=0;
+        fprintf(f,"%.5f\n",a[i+1]);
+    }
+    fclose(f);
+    printf("\n    **Results**\n");
+    printf("Elapsed time: %f seconds\n",el_time);
+    printf("Array is ordered: ");
     printf("%s\n", flag?"true":"false");
-
+    printf("Output file is out_st.txt\n");
     return 0;
 }
 
