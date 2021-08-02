@@ -16,6 +16,10 @@ int main(int argc, char** argv) {
     int N = atoi(argv[2]);
     float a[N];
     f= fopen(argv[1],"r");
+    if(f == NULL){
+        perror("\nFile not found");
+        return 1;
+    }
     for(i=0;i<N;i++)fscanf(f,"%f\n",&a[i]);
     fclose(f);
     float * a_p = a;
