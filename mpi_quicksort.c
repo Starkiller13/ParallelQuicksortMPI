@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &np);
     if (!rank){
-        printf("\nUsing: %d processor cores\n",np);
+        printf("\nUsing	%d processor cores\n",np);
         f = fopen(argv[1],"r");
         if(f == NULL) {
             printf("Error in opening file\n");
