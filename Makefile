@@ -1,5 +1,5 @@
 CC := mpicc
-CCFLAGS:= -O2
+CCFLAGS:= -O2  
 
 TARGET = mpi_quicksort
 
