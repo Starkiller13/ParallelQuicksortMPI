@@ -4,7 +4,7 @@
 #SBATCH -e errors/errors_mpiqs_%j.txt
 #SBATCH -t 00:02:00
 #SBATCH --ntasks 8
-#SBATCH -c 1
+#SBATCH -c 1 
 #SBATCH -p allgroups
 #SBATCH --mem 12G
 
