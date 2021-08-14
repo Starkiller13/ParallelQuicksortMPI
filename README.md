@@ -7,6 +7,7 @@ Needs [Open MPI](https://www.open-mpi.org/) and relative compilers installed.
 ## Installation:
 ```bash
 $ git clone https://github.com/Starkiller13/ParallelQuicksortMPI
+$ cd ParallelQuicksort
 ```
 
 ## Usage:
