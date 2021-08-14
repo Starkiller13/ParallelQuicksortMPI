@@ -15,8 +15,8 @@ $ cd ParallelQuicksortMPI
 ### Local machine:
 ```bash
 $ make
-$ mpirun -np 4 ./mpi_quicksort test_files/numbersBIG.txt 1000000
-$ ./st_quicksort test_files/numbersBIG.txt 1000000
+$ mpirun -np 4 ./mpi_quicksort test_files/num1M.txt 1000000
+$ ./st_quicksort test_files/num1M.txt 1000000
 ```
 
 ### Capri:

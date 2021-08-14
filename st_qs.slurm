@@ -9,5 +9,5 @@
 #SBATCH --mem 12G
 
 
-srun ./st_quicksort test_files/numbersBIG.txt 1000000
+srun ./st_quicksort test_files/num1M.txt 1000000
 

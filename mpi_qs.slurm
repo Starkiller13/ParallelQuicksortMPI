@@ -10,5 +10,5 @@
 
 spack load intel-parallel-studio@professional.2019.4 
 
-mpirun -np 8 ./mpi_quicksort test_files/numbersBIG.txt 1000000
+mpirun -np 8 ./mpi_quicksort test_files/num1M.txt 1000000
 
