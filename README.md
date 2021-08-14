@@ -24,3 +24,6 @@ $ make
 $ sbatch mpi_qs.slurm
 $ sbatch st_qs.slurm
 ```
+
+##Results:
+The ordered files can be found respectively in out_mpi.txt and out_st.txt. Verbose and execution times will be displayed in the shell when executing in local; when running on capri there will be a output file in the folder outputs.

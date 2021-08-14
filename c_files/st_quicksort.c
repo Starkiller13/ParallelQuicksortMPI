@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
     }
     el_time+=(double)(end-begin)/CLOCKS_PER_SEC;
     //Checks if the array is ordered
-    f = fopen("outputs/out_st.txt","w");
+    f = fopen("out_st.txt","w");
     if(f == NULL){perror("\nCannot access current directory");}
     fprintf(f,"%f\n",a[0]);
     for(i=0;i<N-1;i++){
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
     printf(" -> Elapsed time: %f seconds\n",el_time);
     printf(" -> Array is ordered: ");
     printf("%s\n", flag?"true":"false");
-    printf(" -> Output file is outputs/out_st.txt\n");
+    printf(" -> Output file is out_st.txt\n");
     return 0;
 }
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -J mpi_quicksort
-#SBATCH -o output_mpiqs_%j.txt
-#SBATCH -e errors_mpiqs_%j.txt
+#SBATCH -o outputs/output_mpiqs_%j.txt
+#SBATCH -e errors/errors_mpiqs_%j.txt
 #SBATCH -t 00:02:00
 #SBATCH --ntasks 8
 #SBATCH -c 1

@@ -106,7 +106,7 @@ int main(int argc, char** argv) {
     end = MPI_Wtime();
     el_time+=(double)(end-start);
     if(!rank){
-        f = fopen("outputs/out_mpi.txt","w"); 
+        f = fopen("out_mpi.txt","w"); 
         if(f == NULL){perror("\nCannot access current directory");}
         fprintf(f,"%.5f\n",chunk[0]);
         for(i=0;i<this_chunk-1;i++){
@@ -117,7 +117,7 @@ int main(int argc, char** argv) {
         printf(" -> Elapsed time: %f seconds\n",el_time);
         printf(" -> Array is ordered: ");
         printf("%s\n", flag?"true":"false");
-        printf(" -> Output file is outputs/out_mpi.txt\n");
+        printf(" -> Output file is out_mpi.txt\n");
     }
     MPI_Finalize();
     //End

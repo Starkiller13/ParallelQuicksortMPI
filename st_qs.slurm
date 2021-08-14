@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -J st_quicksort
-#SBATCH -o output_mpiqs_%j.txt
-#SBATCH -e errors_mpiqs_%j.txt
+#SBATCH -o outputs/output_stqs_%j.txt
+#SBATCH -e errors/errors_stqs_%j.txt
 #SBATCH -t 00:05:00
 #SBATCH --ntasks 1
 #SBATCH -c 1
