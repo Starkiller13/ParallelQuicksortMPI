@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
         fprintf(f,"%.5f\n",a[i+1]);
     } 
     fclose(f);
-    printf(" -> Elapsed time: %f seconds\n",el_time);
+    printf("\n -> Elapsed time: %f seconds\n",el_time);
     printf(" -> Array is ordered: ");
     printf("%s\n", flag?"true":"false");
     printf(" -> Output file is out_st.txt\n");
