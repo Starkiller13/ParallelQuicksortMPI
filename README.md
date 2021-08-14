@@ -1,12 +1,26 @@
 # ParallelQuicksortMPI
 ***
 ## Prerequisites:
-Needs Open MPI and relative compilers installed
+Needs [Open MPI](https://www.open-mpi.org/) and relative compilers installed.
+GNU gcc compiler is also needed
+
+## Installation:
+```bash
+$ git clone https://github.com/Starkiller13/ParallelQuicksortMPI
+```
 
 ## Usage:
-# Local machine:
-```
+### Local machine:
+```bash
 $ make
 $ mpirun -np 8 ./mpi_quicksort test_files/numbersBIG.txt 1000000
 $ ./st_quicksort test_files/numbersBIG.txt 1000000
+```
+
+### Capri:
+```bash
+$ spack load intel-parallel-studio@professional.2019.4 
+$ make
+$ sbatch mpi_qs.slurm
+$ sbatch st_qs.slurm
 ```
