@@ -13,7 +13,7 @@ $ git clone https://github.com/Starkiller13/ParallelQuicksortMPI
 ### Local machine:
 ```bash
 $ make
-$ mpirun -np 8 ./mpi_quicksort test_files/numbersBIG.txt 1000000
+$ mpirun -np 4 ./mpi_quicksort test_files/numbersBIG.txt 1000000
 $ ./st_quicksort test_files/numbersBIG.txt 1000000
 ```
 
@@ -26,4 +26,4 @@ $ sbatch st_qs.slurm
 ```
 
 ## Results:
-The ordered files can be found respectively in out_mpi.txt and out_st.txt. Verbose and execution times will be displayed in the shell when executing in local; when running on capri there will be a output file in the folder outputs.
+ Files containing the results of the algorithm applied to the input file can be found respectively in out_mpi.txt and out_st.txt. Verbose and execution times will be displayed in the shell when executing in local; when running on capri there will be a output file in the folder outputs.
