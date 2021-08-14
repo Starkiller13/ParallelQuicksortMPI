@@ -1,8 +1,8 @@
 # ParallelQuicksortMPI
-***
+
 ## Prerequisites:
 Needs [Open MPI](https://www.open-mpi.org/) and relative compilers installed.
-GNU gcc compiler is also needed
+[GNU-gcc](https://gcc.gnu.org/) compiler is also needed in order to compile the sequential algorithm.
 
 ## Installation:
 ```bash
