@@ -1,7 +1,11 @@
-CC := mpicc
+CC := gcc
+MCC := mpicc
 CCFLAGS:= -O2  
 
-TARGET = mpi_quicksort
 
-$(TARGET): $(TARGET).c
-	$(CC) $(CCFLAGS) -o $(TARGET) $(TARGET).c
+default:
+	$(CC) $(CCFLAGS) c_files/st_quicksort.c -o st_quicksort
+	$(MCC) $(CCFLAGS) c_files/mpi_quicksort.c -o mpi_quicksort
+
+clean:
+	rm st_quicksort mpi_quicksort

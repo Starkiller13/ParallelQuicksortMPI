@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH -J st_quicksort
+#SBATCH -o output_mpiqs_%j.txt
+#SBATCH -e errors_mpiqs_%j.txt
+#SBATCH -t 00:05:00
+#SBATCH --ntasks 1
+#SBATCH -c 1
+#SBATCH -p allgroups
+#SBATCH --mem 12G
+
+
+srun ./st_quicksort test_files/numbersBIG.txt 1000000
+
