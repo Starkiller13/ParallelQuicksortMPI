@@ -1,5 +1,0 @@
-
-Using 8 processor cores
- -> Elapsed time: 0.574538 seconds
- -> Array is ordered: true
- -> Output file is out_mpi.txt
