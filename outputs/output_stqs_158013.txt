@@ -1,0 +1,4 @@
+
+ -> Elapsed time: 5.789073 seconds
+ -> Array is ordered: true
+ -> Output file is out_st.txt
