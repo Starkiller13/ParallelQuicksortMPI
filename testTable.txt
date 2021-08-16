@@ -1,0 +1,16 @@
+Capri results:
+
+Optimization tests(mean over 5 runs each):
+        o1    o2      o3
+8(1)
+8(2)
+8(3)
+8(m)  
+
+Speedup Rateo tests:
+    100k    500k    1M      5M
+ 2
+ 4
+ 8
+16    
+

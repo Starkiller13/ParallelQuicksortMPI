@@ -14,22 +14,23 @@ void push(float data, struct element** stack){
 }
 // Remove element from the top of the stack
 float pop(struct element** stack){
-    float r=0;
+    float r=-1;
     if(*stack != NULL){
         r = (*stack) -> data;
         struct element* tempPtr = *stack;
         *stack = (*stack) -> next;
-        //free(tempPtr);
+        free(tempPtr);
     }
     return r;
     
 }
 // Display the element at the top of the stack
-void top(struct element* stack){
+float top(struct element* stack){
     if(stack != NULL){
-    printf("Element on top: %f\n", stack -> data);
+        return stack -> data;
     }
     else{
         printf("The stack is empty.\n");
+        return -1;
     }
 }
