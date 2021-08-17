@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
         return 1;
     }
     int N = atoi(argv[2]);
-    float input[N];
+    float * input = malloc(N*sizeof(float));
     float *chunk,*data;
     int this_chunk;
     int i,j,k,chunk_size,flag=1; 

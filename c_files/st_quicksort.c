@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
     stack -> next = NULL;
     stack -> data = 0;
     int N = atoi(argv[2]);
-    float a[N];
+    float * a = malloc(N*sizeof(float));
     f = fopen(argv[1],"r");
     if(f == NULL){
         perror("\nFile not found");
