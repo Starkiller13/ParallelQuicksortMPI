@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage [ english ]{ babel }
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\graphicspath{ {images/} }
+
+\title{Parallel Computing report}
+\author{Andrea Costalonga}
+\date{20/08/2021}
+
+\begin{document}
+\maketitle
+\textbf{\LARGE Parallelizing Quicksort}
+\section{Introduction}
+Among the algorithms used for sorting, quicksort is one of the main actors. It's performances 
+are known to be comparable to the mergesort ones ($T(N) = O(N*log(N))$ mainly, $O(N^2)$ in the worst case) 
+and, as we will see, also its parallel performances are not far from $T(N,P) = O(\frac{N}{P}*log(\frac{N}{P}))$.
+\\The algorithm can be described with the following recursive formulation:
+\begin{enumerate}
+    \item If the istance has at most one element, return;(base case)
+    \item Otherwise pick a element among the ones in the instance, that will be the PIVOT;
+    \item Separate the elements greater than the PIVOT (right subgroup) from the others(left subgroup);
+    \item Apply recursively the algorithm to the left and right subgroups;
+\end{enumerate}
+There are various methods to pick the pivot: chosen at random, picked from the back or 
+picking the median of a subgroup,etc\dots; in this implementation I've gone for the second option.
+The usual implementation of the quicksort works \textit{In Loco}, switching the position between the elements
+of the input array. In my version I've used stacks implemented via linked lists: it's a questionable choice
+but I really liked the challenge and the urge of doing something different from my colleagues.
+
+\section{Parallel-ify}
+I tried to parallelize the algorithm in the following way:
+\begin{enumerate}
+    \item Partitioning the input in P partitions;(with P := \# of processors)
+    \item Applying the sequential algorithm to those partitions;
+    \item Merging the partitions toghether;
+\end{enumerate}
+
+Surprisingly this procedure worked flawlessly so I've gone for it. Pragmatically speaking the partitioning of 
+the instance has been done through the method $MPI\_Scatter()$ and the merging steps using the basic
+methods $MPI\_Send()$ and $MPI\_Recv()$.
+
+\subsection*{Analysis}
+For simplicity for now on we will consider N(:= instance size) a multiple of P 
+and P a power of 2.\\
+We can start analysing the performances of the sequential algorithm running on the 
+$n = \frac{N}{P}$ sized partitions. We can easilly state that in the average case
+$T\textsubscript{sort}(n) = O(n*log(n))$ since we are just applying the sequential algorithm for a 
+smaller instance.\\ 
+The parallel merger, instead, works merging in parallel couples of partitions going from P partitions to 1. 
+With a good approximation we can assume that a good serial merging algorithm can merge two $n/2$ arrays in time 
+$T\textsubscript{merge}(n) = n$.  
+Given the hypothesys above we can write without loss of generality the following equation:
+\begin{equation}
+T\textsubscript{merge}(N,P) =\sum_{i=0}^{log_2(P)-1}(T\textsubscript{merge}(\frac{N}{2^i})) \le 2N = O(N) 
+\end{equation}
+Knowing that $T(N,P) = T\textsubscript{merge}(N,P) + T\textsubscript{sort}(\frac{N}{P})$ we can naturally derive
+\begin{equation}
+T(N,P) = O(\frac{N}{P}*log(\frac{N}{P})) + O(N) = O(\frac{N}{P}*log(\frac{N}{P}))
+\end{equation}
+since $\lim_{N \to \inf}\frac{N}{\frac{N}{P}*log(\frac{N}{P}))} = 0$ for any fixed P > 0. \\
+Things work similarly for the worst case scenario, since we can just assume $T\textsubscript{sort}(n) = O(n^2)$, obtaining 
+$T(N,P) = O((\frac{N}{P})^2)$.
+
+\section{Experimental Analysis}
+\subsection*{Optimizations}
+\subsection*{Execution Times and Speedup}
+
+\end{document}
