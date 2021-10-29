@@ -1,54 +1,73 @@
 from matplotlib import pyplot as plt 
-
-l100k = [0.023931,0.047268,0.100680,0.185739]
-l500k = [0.263586,0.321790,0.648521,1.541518]
-l1M =   [0.619727,1.562687,1.910092,4.343471]
-l5M =   [4.470648,7.117961,16.075440,34.431294]
+l1 = [1.844845,2.376974,2.273959,2.141857]
+l2 = [3.929487,4.790447,2.779488,4.837241]
+l4 =   [7.761439,5.848254,7.008684,7.701633]
+l8 =   [4.028433,11.85865,9.712960,28.40671]
 x = ['100k','500k','1M','5M']
-y = ['MPI(8 cpus)', 'MPI(4 cpus)', 'MPI(2 cpus)', 'sequential(1 cpu)']
+y = ['MPI(16 cpus)','MPI(8 cpus)', 'MPI(4 cpus)', 'MPI(2 cpus)']
 plt.figure(figsize =(8,6))
-plt.title('Performance with different input sizes')
-plt.plot(x,l100k)
-plt.plot(x,l500k)
-plt.plot(x,l1M)
-plt.plot(x,l5M)
+plt.title('Speedup coefficient of the previous runs')
+plt.plot(x,l8)
+plt.plot(x,l4)
+plt.plot(x,l2)
+plt.plot(x,l1)
 plt.legend(y)
 plt.xlabel("array size")
-plt.ylabel("Elapsed time (seconds)")
-plt.savefig('./charts/inputsChart.png')
+plt.ylabel("speedup rateo")
+plt.savefig('./charts/speedup.png')
 plt.close()
 
+'''
+l1 = [0.185739, 1.541518, 4.343471, 34.431294]
+l2 = [0.100680,0.648521,1.910092,16.075440]
+l4 =   [0.047268,0.321790,1.562687,7.117961]
+l8 =   [0.023931,0.263586,0.619727,4.470648]
+l16 = [0.046107, 0.129991, 0.447183, 1.212083]
+x = ['100k','500k','1M','5M']
+y = ['MPI(16 cpus)','MPI(8 cpus)', 'MPI(4 cpus)', 'MPI(2 cpus)', 'sequential(1 cpu)']
 plt.figure(figsize =(8,6))
-plt.title('Performance with different input sizes (logarithmic)')
-plt.plot(x,l100k)
-plt.plot(x,l500k)
-plt.plot(x,l1M)
-plt.plot(x,l5M)
+plt.title('Performance with different input sizes (logarithmic scale y axis)')
+plt.plot(x,l16)
+plt.plot(x,l8)
+plt.plot(x,l4)
+plt.plot(x,l2)
+plt.plot(x,l1)
+plt.yscale("log")
 plt.legend(y)
 plt.xlabel("array size")
 plt.ylabel("Elapsed time (seconds)")
-plt.yscale('log')
 plt.savefig('./charts/inputsChartLog.png')
 plt.close()
-
-o1_1=[5.187633,5.153617,5.802215,5.770064,5.789073]
-o2_1=[5.746162,5.089227,5.672594,5.569185,5.608725]
-o3_1=[5.633591,5.588410,5.648716,5.595168,5.644653]
-o1_8=[0.667561,0.557386,0.603485,0.574538,0.344274]
-o2_8=[0.616873,0.554488,0.547053,0.573301,0.431315]
-o3_8=[0.426237,0.682554,0.322515,0.661038,0.323314]
-plt.figure(figsize =(8,8))
+'''
+'''
+z = ['O1','O2','O3','no opt']
+o100k=[0.209533,0.196411,0.197216,0.272793]
+o500k=[1.570790,2.083179,1.961177,1.920316]
+o1M=[5.259612,4.733656,5.632962,5.259389]
+o5M=[34.630427,31.375935,33.084449,34.837840]
+plt.figure(figsize = (8,6))
 plt.suptitle('Compiler Optimizations Analysis')
-plt.subplot(2,1,1)
-plt.boxplot([o1_1,o2_1,o3_1],labels=['O1','O2','O3'],patch_artist=True)
-plt.title('Sequential (1 cpu)')
-plt.xlabel('Compiler optimization')
-plt.ylabel("Elapsed time (seconds)")
-plt.subplot(2,1,2)
-plt.title('Parallel (8 cpus)')
-plt.boxplot([o1_8,o2_8,o3_8],labels=['O1','O2','O3'],patch_artist=True)
-plt.xlabel('Compiler optimization')
-plt.ylabel("Elapsed time (seconds)")
-plt.tight_layout()
+plt.scatter(z,o5M)
+plt.scatter(z,o1M)
+plt.scatter(z,o500k)
+plt.scatter(z,o100k)
+plt.yscale('log')
+plt.xlabel('Optimizations')
+plt.ylabel('Execution time (lower is better)')
+plt.legend(x[::-1])
+for a,b in zip(z,o100k):
+    label = "{:.2f}s".format(b)
+    plt.annotate(label, (a,b),textcoords="offset points", xytext=(0,10), ha='center')
+for a,b in zip(z,o500k):
+    label = "{:.2f}s".format(b)
+    plt.annotate(label, (a,b),textcoords="offset points", xytext=(0,10), ha='center')
+for a,b in zip(z,o1M):
+    label = "{:.2f}s".format(b)
+    plt.annotate(label, (a,b),textcoords="offset points", xytext=(0,10), ha='center')
+for a,b in zip(z,o5M):
+    label = "{:.2f}s".format(b)
+    plt.annotate(label, (a,b),textcoords="offset points", xytext=(0,10), ha='center')
+
 plt.savefig('./charts/opt_boxplot.png')
 plt.close()
+'''

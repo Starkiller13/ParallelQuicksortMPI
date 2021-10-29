@@ -44,7 +44,7 @@ the instance has been done through the method $MPI\_Scatter()$ and the merging s
 methods $MPI\_Send()$ and $MPI\_Recv()$.
 
 \subsection*{Analysis}
-For simplicity for now on we will consider N(:= instance size) a multiple of P 
+For simplicity from now on we will consider N(:= instance size) a multiple of P 
 and P a power of 2.\\
 We can start analysing the performances of the sequential algorithm running on the 
 $n = \frac{N}{P}$ sized partitions. We can easilly state that in the average case
@@ -61,12 +61,41 @@ Knowing that $T(N,P) = T\textsubscript{merge}(N,P) + T\textsubscript{sort}(\frac
 \begin{equation}
 T(N,P) = O(\frac{N}{P}*log(\frac{N}{P})) + O(N) = O(\frac{N}{P}*log(\frac{N}{P}))
 \end{equation}
-since $\lim_{N \to \inf}\frac{N}{\frac{N}{P}*log(\frac{N}{P}))} = 0$ for any fixed P > 0. \\
+since $\lim_{N \to \inf}\frac{N}{\frac{N}{P}*log(\frac{N}{P}))} = 0$ for any fixed P > 0, and if $f(n) \in o(n)$ then $f(n) \in O(n)$.\\
 Things work similarly for the worst case scenario, since we can just assume $T\textsubscript{sort}(n) = O(n^2)$, obtaining 
 $T(N,P) = O((\frac{N}{P})^2)$.
-
+\pagebreak
 \section{Experimental Analysis}
+Below there are some results obtained running the algorithms on HPC Capri, every 
+job used the same amount of RAM, 12gb.\\
 \subsection*{Optimizations}
+First of all I've started checking if I could tweak the algorithm in some way to obtain better
+performances. I've tryed to run the algorithm without compiler optiminzations and then using 
+O1, O2, O3.\\
+\includegraphics[scale=.6]{opt_boxplot.png}
+As we can see there's not much difference between the 4 different cases, still in the overall results
+O2 behaved quite well, so I've decided to use it for the following tests. In the plot I've showed the results for
+the sequential algorithm, the parallel algorithm behaved very similarly so I've preferred to omit the analysis
+for the MPI implementation.
 \subsection*{Execution Times and Speedup}
+\includegraphics[scale=.6]{inputsChart.png}
+In the experiments I've used 4 different text-files containing a increasing amount of elements: 
+100k, 500k, 1M, 5M. Every element in those files is a floating point number (float). The graph 
+above shows the running time of the quicksort algorithm: what we can clearly see is the great 
+difference between the sequential algorithm and the optimized version running with 2, 4, 8 and 16 
+cores; the used optimization for both the standard and the parallelized algorithm is '-O2' as 
+mentioned above. Every step, going from 2 to 16 cores, brought better results in terms of running 
+time, with a maximum speedup rateo of 28 (16 cores with the 5M file more info in the third chart).  \\
+
+\includegraphics[scale=.6]{inputsChartLog.png}
+A better illustration of the results using a logarithmic scale on the time axis
+can be found above.
+
+\includegraphics[scale=.6]{speedup.png}
+With this last plot I wanted to show the different speedups obtained in those runs, and it's easy 
+to see that having a higher number of processors in this case makes the algorithm run faster, and
+it's a good occasion to point out that this algorithm, Quicksort, behaves very nicely when trying 
+to parallelize it.
+
 
 \end{document}
