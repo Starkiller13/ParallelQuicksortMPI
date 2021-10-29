@@ -77,7 +77,7 @@ As we can see there's not much difference between the 4 different cases, still i
 O2 behaved quite well, so I've decided to use it for the following tests. In the plot I've showed the results for
 the sequential algorithm, the parallel algorithm behaved very similarly so I've preferred to omit the analysis
 for the MPI implementation.
-\subsection*{Execution Times and Speedup}
+\subsection*{Execution Times}
 \includegraphics[scale=.6]{inputsChart.png}
 In the experiments I've used 4 different text-files containing a increasing amount of elements: 
 100k, 500k, 1M, 5M. Every element in those files is a floating point number (float). The graph 
@@ -85,17 +85,31 @@ above shows the running time of the quicksort algorithm: what we can clearly see
 difference between the sequential algorithm and the optimized version running with 2, 4, 8 and 16 
 cores; the used optimization for both the standard and the parallelized algorithm is '-O2' as 
 mentioned above. Every step, going from 2 to 16 cores, brought better results in terms of running 
-time, with a maximum speedup rateo of 28 (16 cores with the 5M file more info in the third chart).  \\
+time, with a maximum speedup rateo of 28 (16 cores with the 5M file, more info in the fourth chart). 
+A better illustration of the results using a logarithmic scale on the time axis can be found below.  
 
 \includegraphics[scale=.6]{inputsChartLog.png}
-A better illustration of the results using a logarithmic scale on the time axis
-can be found above.
-
+Here in the last image I've plotted some results about speedup:\\
 \includegraphics[scale=.6]{speedup.png}
-With this last plot I wanted to show the different speedups obtained in those runs, and it's easy 
+With this last plot I wanted to show the different speedups obtained in the test runs, and it's easy 
 to see that having a higher number of processors in this case makes the algorithm run faster, and
 it's a good occasion to point out that this algorithm, Quicksort, behaves very nicely when trying 
-to parallelize it.
+to parallelize it. The results follow quite nicely the predicted speedup.
 
+\section{Final Considerations}
+It has been a good challenge trying to implement a performing version of quicksort; the entire 
+repository with the final version of the algorithm can be found here: https://github.com/Starkiller13/ParallelQuicksortMPI.
+In the repository you will find a Readme.md with everything needed to compile and run the algorithm.
 
+\section{Bibliography}
+\begin{enumerate}
+    \item Ideas for the parallelization process and recap of quicksort:\\
+    https://cse.buffalo.edu/faculty/miller/Courses/CSE633/Sri-Abinaya-Gunasekaran-Spring-2019.pdf
+    \item Linked list Stack implementation:\\
+    https://www.educative.io/edpresso/how-to-implement-a-stack-in-c-using-a-linked-list
+    \item Python plot library used for the plots:\\
+    https://matplotlib.org/
+    \item C documentation:\\
+    https://devdocs.io/c/
+\end{enumerate}
 \end{document}
